@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GIFT RUN GAME</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+</head>
+<body>
+    <!-- Главный экран кликера -->
+    <div id="clicker-tab" class="tab-screen active">
+        <h1 class="tab-title">Кликер</h1>
+        <div id="counter">0</div>
+        <button id="clicker-btn"></button>
+        <div id="energy-counter"><span id="energy">200</span>/200</div>
+    </div>
+
+    <!-- Экран кейсов -->
+    <div id="cases" class="tab-screen">
+        <h1 class="tab-title">Кейсы</h1>
+        <div class="cases-container">
+            <div class="case" data-price="1000">
+                <img src="case1.png" alt="Кейс бомж">
+                <div class="case-name">Кейс бомж</div>
+                <div class="case-price">1000</div>
+            </div>
+            <div class="case" data-price="2000">
+                <img src="case2.png" alt="Кейс новичок">
+                <div class="case-name">Кейс новичок</div>
+                <div class="case-price">2000</div>
+            </div>
+            <div class="case" data-price="5000">
+                <img src="case3.png" alt="Начальный кейс">
+                <div class="case-name">Начальный кейс</div>
+                <div class="case-price">5000</div>
+            </div>
+            <div class="case" data-price="10000">
+                <img src="case4.png" alt="Лучший бесплатный">
+                <div class="case-name">Лучший бесплатный</div>
+                <div class="case-price">10000</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Экран просмотра кейса -->
+<div id="case-view" class="tab-screen">
+
+    <div class="case-content">
+        <h2 id="case-view-title">Название кейса</h2>
+        <div id="case-view-items">
+            <p id="case-reward-info">Для открытия этого кейса нужно: <span id="required-points">1000</span> очков</p>
+            <p id="case-reward-status">У вас: <span id="current-points">0</span> очков</p>
+            
+            <!-- ВСТАВЬТЕ ЭТОТ БЛОК СЕТКИ ПРИЗОВ СЮДА -->
+            <div id="rewards-grid" class="rewards-grid" style="display: none;">
+                <!-- Первый ряд -->
+                <div class="reward-item"><img src="gift1.png" alt="Подарок 1"></div>
+                <div class="reward-item"><img src="gift2.png" alt="Подарок 2"></div>
+                <div class="reward-item"><img src="gift3.png" alt="Подарок 3"></div>
+                <div class="reward-item"><img src="gift4.png" alt="Подарок 4"></div>
+                <!-- Второй ряд -->
+                <div class="reward-item reward-points">3000</div>
+                <div class="reward-item reward-points">1500</div>
+                <div class="reward-item reward-points">500</div>
+                <div class="reward-item reward-points">100</div> 
+</div>
+
+
+
+<div id="rewards-grid-novice" class="rewards-grid" style="display: none;">
+    <!-- Первый ряд -->
+    <div class="reward-item"><img src="gift5.png" alt="Подарок 5"></div>
+    <div class="reward-item"><img src="gift6.png" alt="Подарок 6"></div>
+    <div class="reward-item"><img src="gift7.png" alt="Подарок 7"></div>
+    <div class="reward-item"><img src="gift8.png" alt="Подарок 8"></div>
+    <!-- Второй ряд -->
+    <div class="reward-item reward-points">4000</div>
+    <div class="reward-item reward-points">2800</div>
+    <div class="reward-item reward-points">1200</div>
+    <div class="reward-item reward-points">500</div>
+</div>
+
+<!-- После rewards-grid-novice -->
+<div id="rewards-grid-starter" class="rewards-grid" style="display: none;">
+    <!-- Первый ряд -->
+    <div class="reward-item"><img src="gift9.png" alt="Подарок 9"></div>
+    <div class="reward-item"><img src="gift10.png" alt="Подарок 10"></div>
+    <div class="reward-item"><img src="gift11.png" alt="Подарок 11"></div>
+    <div class="reward-item"><img src="gift12.png" alt="Подарок 12"></div>
+    <!-- Второй ряд -->
+    <div class="reward-item reward-points">10000</div>
+    <div class="reward-item reward-points">6500</div>
+    <div class="reward-item reward-points">3000</div>
+    <div class="reward-item reward-points">1500</div>
+</div>
+
+
+<!-- После rewards-grid-starter -->
+<div id="rewards-grid-premium" class="rewards-grid" style="display: none;">
+    <!-- Первый ряд -->
+    <div class="reward-item"><img src="gift13.png" alt="Подарок 13"></div>
+    <div class="reward-item"><img src="gift14.png" alt="Подарок 14"></div>
+    <div class="reward-item"><img src="gift15.png" alt="Подарок 15"></div>
+    <div class="reward-item"><img src="gift16.png" alt="Подарок 16"></div>
+    <!-- Второй ряд -->
+    <div class="reward-item reward-points">20000</div>
+    <div class="reward-item reward-points">12000</div>
+    <div class="reward-item reward-points">7000</div>
+    <div class="reward-item reward-points">3000</div>
+</div>
+
+    <!-- Добавляем общий блок для всех кейсов -->
+    <div class="case-special-block">Вы выиграли:</div>
+
+            <button id="open-case-btn" disabled>Открыть кейс</button>
+        </div>
+        <button id="close-case-btn">Закрыть</button>
+    </div>
+</div>
+
+    <!-- Другие экраны -->
+<div id="quests" class="tab-screen">
+    <h1 class="tab-title">Задания</h1>
+    <div class="quest-container">
+        <!-- Задание 1 -->
+        <div class="quest-item">
+            <div class="quest-info">
+                <span class="quest-name">Подписка на канал 2000 очков</span>
+            </div>
+            <a href="https://t.me/gift_run" target="_blank" class="quest-btn" id="telegram-quest-btn">Перейти</a>
+        </div>
+
+        <!-- Новое задание -->
+        <div class="quest-item">
+            <div class="quest-info">
+                <span class="quest-name">Накликать 500 раз (500 очков)</span>
+                <span id="click-counter">0/500</span>
+            </div>
+            <button class="quest-btn" id="click-quest-btn" disabled>Получить</button>
+        </div>
+
+
+<div class="quest-item">
+    <div class="quest-info">
+        <span class="quest-name">Накликать 1000 раз (1000 очков)</span>
+        <span id="click-counter-1000">0/1000</span>
+    </div>
+    <button class="quest-btn" id="click-quest-btn-1000" disabled>Получить</button>
+</div>
+
+<!-- После других заданий, но перед закрывающим </div> -->
+<div class="quest-item">
+    <div class="quest-info">
+        <span class="quest-name">Открыть 5 кейсов (1000 очков)</span>
+        <span id="case-counter">0/5</span>
+    </div>
+    <button class="quest-btn" id="case-quest-btn" disabled>Получить</button>
+</div>
+
+
+<div class="quest-item">
+    <div class="quest-info">
+        <span class="quest-name">Введите промокод (2000 очков)</span>
+        <input type="text" id="promo-code-input" class="promo-input" placeholder="XXXXX">
+    </div>
+    <button class="quest-btn" id="promo-btn">Активировать</button>
+</div>
+
+
+<div id="promo-success" class="promo-success-message">Промокод начислен!</div>
+
+
+    </div>
+</div>
+
+    </div>
+    <div id="shop" class="tab-screen">
+        <h1 class="tab-title">Магазин</h1>
+         <div class="shop-info">
+        2000 очков = 1 Telegram Star <img src="star.png" alt="Звезда" class="star-icon">
+    </div>
+<div class="player-id">
+            ID: <span id="player-id-value"></span>
+        </div>
+
+
+<div class="shop-notice">
+    Если не работает маркет, перезагрузите игру
+</div>
+
+
+
+
+        <div class="shop-items-grid">
+            <!-- 1 ряд -->
+            <div class="shop-item" data-price="30000">
+                <img src="shop1.png" alt="Товар 1">
+                <div class="shop-item-price">30000</div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="30000">
+                <img src="shop2.png" alt="Товар 2">
+                <div class="shop-item-price">30000</div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="50000">
+                <img src="shop3.png" alt="Товар 3">
+                <div class="shop-item-price">50000</div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            
+            <!-- 2 ряд -->
+            <div class="shop-item" data-price="45000">
+                <img src="shop4.png" alt="Товар 4">
+                <div class="shop-item-price">45000 <span class="discount">скидка</span></div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="90000">
+                <img src="shop5.png" alt="Товар 5">
+                <div class="shop-item-price">90000 <span class="discount">скидка</span></div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="90000">
+                <img src="shop6.png" alt="Товар 6">
+                <div class="shop-item-price">90000 <span class="discount">скидка</span></div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            
+            <!-- 3 ряд -->
+            <div class="shop-item" data-price="160000">
+                <img src="shop7.png" alt="Товар 7">
+                <div class="shop-item-price">160000 <span class="discount">скидка</span></div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="180000">
+                <img src="shop8.png" alt="Товар 8">
+                <div class="shop-item-price">180000 <span class="discount">скидка</span></div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+            <div class="shop-item" data-price="200000">
+                <img src="shop9.png" alt="Товар 9">
+                <div class="shop-item-price">200000</div>
+                <button class="shop-buy-btn">Купить</button>
+            </div>
+        </div>
+        
+<div class="support-section">
+    <a href="https://t.me/gift_adr" class="support-btn" target="_blank">Техподдержка</a>
+</div>
+
+    <!-- Всплывающее сообщение -->
+    <div id="purchase-message" class="purchase-message">Заявка отправлена! GIFT RUN скоро отправит вам подарок</div>
+</div>
+
+    </div>
+    </div>
+
+    <!-- Нижнее меню -->
+    <nav id="mobile-menu">
+        <button class="menu-btn active" data-tab="clicker-tab">
+            <span>Кликер</span>
+        </button>
+        <button class="menu-btn" data-tab="cases">
+            <span>Кейсы</span>
+        </button>
+        <button class="menu-btn" data-tab="quests">
+            <span>Задания</span>
+        </button>
+        <button class="menu-btn" data-tab="shop">
+            <span>Магазин</span>
+        </button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>

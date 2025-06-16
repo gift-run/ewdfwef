@@ -1,0 +1,1148 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, 
+              #ffffffcc 5%,
+              rgba(214, 180, 252, 0.574) 30%, 
+              rgba(137, 43, 226, 0.567) 100%);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.tab-title {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 2.2rem;
+    margin: 0 0 1rem 0;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.3),
+        0 0 10px rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+}
+
+#counter {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    font-weight: 900;
+    color: #ff3366;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.3),
+        0 0 10px rgba(255,255,255,0.5);
+    font-family: 'Impact', sans-serif;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+#counter.changed {
+    transform: scale(1.03);
+    color: #ff1493;
+}
+
+#clicker-btn {
+    width: 160px;
+    height: 160px;
+    background: url('picture.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    margin: 1rem 0;
+    padding: 0;
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+#clicker-btn:active {
+    transform: scale(0.97);
+}
+
+.click-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: clickAnim 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    transform-origin: center;
+    opacity: 0;
+}
+
+@keyframes clickAnim {
+    0% { transform: scale(0.5); opacity: 0.7; }
+    50% { transform: scale(7); opacity: 0.4; }
+    100% { transform: scale(7); opacity: 0; }
+}
+
+#energy-counter {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ff3366;
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.2),
+        0 0 5px rgba(255,255,255,0.3);
+    font-family: 'Impact', sans-serif;
+    margin-top: 1rem;
+}
+
+.tab-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 65px;
+    padding: 20px;
+    text-align: center;
+}
+
+.tab-screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+
+#cases {
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.cases-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+    padding-bottom: 20px;
+}
+
+.case {
+    width: 45%;
+    aspect-ratio: 1/1;
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Равномерное распределение пространства */
+    padding: 10px;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+    position: relative; /* Добавляем для позиционирования */
+}
+
+
+.case:active {
+    transform: scale(0.95);
+}
+
+.case img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 10px; /* Добавляем отступ сверху */
+}
+
+.case-name {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.2rem;
+    margin: 5px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.case-price {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.2rem;
+    margin-bottom: 5px; /* Отступ снизу */
+}
+
+#case-view {
+    align-items: center;
+    justify-content: center;
+}
+
+.case-content {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+#case-view-title {
+    color: #ff3366;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+#case-view-items {
+    min-height: auto; /* Убираем фиксированную высоту */
+    max-height: 50vh; /* Ограничиваем максимальную высоту */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Прижимаем контент к верху */
+    gap: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px 0;
+} 
+#open-case-btn {
+    background: linear-gradient(to right, #4CAF50, #2E7D32);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.2rem;
+    margin-top: -10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#open-case-btn:active {
+    transform: scale(0.95);
+}
+
+#open-case-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+#close-case-btn {
+    background: linear-gradient(to right, #ff3366, #ff1493);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#close-case-btn:active {
+    transform: scale(0.95);
+}
+
+#mobile-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+    background: linear-gradient(to top, #4b1b7a, #6a3093);
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.menu-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #e2c4ff;
+    font-family: 'Impact', sans-serif;
+    font-size: 0.85rem;
+    padding: 8px 5px;
+    transition: all 0.3s;
+}
+
+.menu-btn.active {
+    color: white;
+    background: rgba(255,255,255,0.1);
+}
+
+.menu-btn span {
+    margin-top: 3px;
+}
+
+.menu-btn:active {
+    transform: scale(0.95);
+}
+
+.menu-btn::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.menu-btn[data-tab="clicker-tab"]::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e2c4ff"><path d="M11 9V5H9v4H5v2h4v4h2v-4h4V9h-4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/></svg>');
+}
+
+.menu-btn[data-tab="cases"]::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e2c4ff"><path d="M21 6h-4V5a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3v1H3a1 1 0 0 0-1 1v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a1 1 0 0 0-1-1zM9 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V5zm10 14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8h14v11z"/></svg>');
+}
+
+.menu-btn[data-tab="quests"]::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e2c4ff"><path d="M12 2a10 10 0 0 1 7.7 16.3 1 1 0 0 1-1.4 0 1 1 0 0 1 0-1.4 8 8 0 1 0-11.3 0 1 1 0 0 1 0 1.4 1 1 0 0 1-1.4 0A10 10 0 0 1 12 2zm0 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-8a1 1 0 0 1 1 1v5a1 1 0 0 1-2 0V7a1 1 0 0 1 1-1z"/></svg>');
+}
+
+.menu-btn[data-tab="shop"]::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e2c4ff"><path d="M17 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM21 4H4v2h1l1 10h12l1-10h1V4z"/></svg>');
+}
+
+.menu-btn.active::before {
+    filter: brightness(1.5);
+}
+
+
+
+#clicker-tab {
+    justify-content: center; /* Добавьте это чтобы центрировать содержимое по вертикали */
+}
+
+#counter {
+    margin-bottom: 2rem; /* Увеличьте отступ */
+}
+
+#clicker-btn {
+    margin: 2rem 0; /* Увеличьте отступы сверху и снизу */
+}
+
+#energy-counter {
+    margin-top: 2rem; /* Увеличьте отступ */
+}
+
+.case-info {
+    width: 100%;
+    text-align: center;
+    margin-top: auto; /* Прижимаем к низу */
+}
+
+
+
+
+.rewards-grid {
+    display: none; /* По умолчанию скрыта */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Увеличили промежутки между элементами */
+    width: calc(100% - 40px); /* Учитываем увеличенные отступы */
+    max-width: 400px;
+    margin: 15px auto; /* Увеличили внешние отступы */
+    padding: 15px; /* Увеличили внутренние отступы */
+    box-sizing: border-box; /* Важно! Чтобы padding не увеличивал общую ширину */
+        margin-top: 1px; /* Уменьшаем отступ сверху */
+}
+
+.reward-item {
+    aspect-ratio: 1/1;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+/* Стили для изображений подарков */
+.reward-item img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Стили для ячеек с очками */
+.reward-points {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366; /* Розовый цвет */
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.2),
+        0 0 5px rgba(255,255,255,0.3);
+}
+
+/* Эффекты при наведении/нажатии */
+.reward-item:active {
+    transform: scale(0.95);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 500px) {
+    .rewards-grid {
+        gap: 8px;
+        padding: 5px;
+    }
+    .reward-points {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+/* Обновленные стили для контейнера заданий */
+.quest-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование по горизонтали */
+}
+
+/* Обновленные стили для элемента задания */
+.quest-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 12px 15px;
+    width: 100%; /* Занимает всю доступную ширину */
+    max-width: 320px;
+    margin: 0 auto 15px; /* Центрирование и отступ снизу */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    gap: 8px;
+    box-sizing: border-box; /* Чтобы padding не влиял на ширину */
+}
+
+.quest-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.quest-name {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+    text-decoration: none !important; /* Убираем подчеркивание */
+}
+
+
+.quest-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Impact', sans-serif;
+    font-size: 0.95rem;
+    text-decoration: none !important; /* Убираем подчеркивание */
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+.quest-btn:hover {
+    background: #3367d6;
+    transform: scale(1.02);
+}
+
+.quest-btn:active {
+    transform: scale(0.98);
+}
+
+/* Стиль для выполненного задания */
+.quest-btn.completed,
+.quest-btn:disabled {
+    background: #4CAF50 !important;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+
+
+
+@media (max-width: 500px) {
+    .quest-item {
+        flex-direction: column;
+        align-items: center; /* Центрирование содержимого */
+        text-align: center; /* Выравнивание текста по центру */
+        width: 90%; /* Немного уменьшим ширину на мобильных */
+        padding: 15px; /* Увеличим padding для лучшего вида */
+    }
+
+    .quest-info {
+        width: 100%; /* Занимает всю ширину */
+        margin-bottom: 12px;
+    }
+
+    .quest-btn {
+        width: 100%;
+        max-width: 200px;
+        margin-top: 10px;
+    }
+}
+
+
+/* Стили кнопки */
+.quest-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Стиль заблокированной кнопки */
+.quest-btn.completed {
+    background: #4CAF50 !important;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Запрет любых взаимодействий */
+.quest-btn:disabled {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+
+
+
+
+
+/* Добавить в конец style.css */
+.reward-animation {
+    animation: pulse 0.5s 3;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.quest-btn.completed {
+    background: #cccccc !important;
+    color: #666666 !important;
+    cursor: default !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.8;
+}
+
+/* Стиль кнопки заданий */
+.quest-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Заблокированное состояние */
+.quest-btn:disabled {
+    background: #03a120 !important;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+
+
+/* Мобильная версия */
+@media (max-width: 500px) {
+    .quest-item {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .quest-info {
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .quest-name {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .quest-reward {
+        font-size: 1.5rem;
+    }
+
+    .quest-btn {
+        width: 100%;
+        max-width: 200px;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+}
+
+
+
+
+
+
+.case-special-block {
+    width: 100%;
+    max-width: 400px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    margin: 10px auto; /* Фиксированный отступ */
+    padding: 15px;
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 0; /* Убираем смещение вверх */
+    z-index: 1; /* Поднимаем над другими элементами */
+}
+
+.case-special-block {
+    /* Существующие стили остаются без изменений */
+    color: #ff3366; /* Розовый цвет, как в других элементах */
+    font-family: 'Impact', sans-serif; /* Такой же шрифт */
+    font-size: 1.2rem; /* Размер шрифта */
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.2), /* Тень как у других текстов */
+        0 0 5px rgba(255,255,255,0.3);
+    font-weight: bold; /* Жирный шрифт */
+        top: -20px; /* Измените это значение на меньшее или 0 */
+            margin-bottom: 5px; /* Уменьшаем отступ снизу (было больше) */
+    /* Остальные стили остаются без изменений */
+
+}
+
+
+/* Добавим в конец файла */
+.reward-item.active {
+    position: relative;
+    z-index: 10;
+    animation: pulseBorder 0.5s infinite;
+    box-shadow: 0 0 0 3px #4CAF50;
+}
+
+@keyframes pulseBorder {
+    0% { box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.7); }
+    50% { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.4); }
+    100% { box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.7); }
+}
+
+.case-special-block {
+    transition: all 0.3s ease;
+    
+}
+
+.case-special-block.win {
+    animation: winPulse 1s 3;
+}
+
+@keyframes winPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+
+
+
+
+/* Анимация счетчика */
+.counter-update {
+    animation: pulseCounter 0.2s ease-in-out;
+    color: #4CAF50;
+}
+
+@keyframes pulseCounter {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Стиль для счетчика в задании */
+.quest-counter {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1rem;
+    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+
+/* После всех других стилей */
+.quest-btn.completed {
+    background: #4CAF50 !important;
+    color: white !important;
+    cursor: default !important;
+    pointer-events: none !important;
+    opacity: 0.8 !important;
+}
+
+
+
+
+/* Стили для информации в магазине */
+.shop-info {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Стили для иконки звезды */
+.star-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-left: 2px;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+}
+
+
+/* Контейнер магазина */
+.shop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 100px); /* Учитываем заголовок */
+    padding-bottom: 65px; /* Учитываем нижнее меню */
+}
+
+/* Блок с курсом обмена */
+.shop-exchange-rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Текст курса */
+.exchange-text {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.8rem;
+    margin-right: 8px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Иконка звезды */
+.star-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+/* Анимация при наведении */
+.shop-exchange-rate:hover .star-icon {
+    transform: scale(1.1) rotate(15deg);
+}
+
+
+.player-id {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366b7;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 15px; /* Уменьшили отступ сверху (было 30px) */
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.2),
+        0 0 5px rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+    position: relative; /* Добавляем для возможного смещения */
+    top: -10px; /* Поднимаем еще выше */
+}
+
+#player-id-value {
+    color: #ff3366b7;
+    font-weight: bold;
+    margin-left: 1.2px;
+}
+
+
+
+/* Стили магазина */
+/* Контейнер магазина */
+.shop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+}
+
+/* Сетка товаров */
+.shop-items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+/* Карточка товара */
+.shop-item {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.shop-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Изображение товара */
+.shop-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Ценник */
+.shop-item-price {
+    font-family: 'Impact', sans-serif;
+    color: #ff3366;
+    font-size: 1.2rem;
+    margin: 5px 0;
+    text-align: center;
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 51, 102, 0.4);
+    letter-spacing: 0.5px;
+}
+
+/* Стиль для скидки */
+.discount {
+    display: inline-block;
+    position: relative;
+    font-size: 0.9rem;
+    margin-left: 4px;
+}
+
+.discount::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff3366, transparent);
+}
+
+/* Кнопка покупки */
+.shop-buy-btn {
+    background: linear-gradient(135deg, #ff3366, #ff1493);
+    color: white;
+    border: none;
+    padding: 8px 0;
+    border-radius: 8px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 90%;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.shop-buy-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ff1493, #ff3366);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 5px 10px rgba(0, 0, 0, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.shop-buy-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.shop-buy-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    color: #666666;
+    text-shadow: none;
+}
+
+
+/* Сообщение о покупке */
+.purchase-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ff3366;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+    border: 2px solid #ff3366;
+    text-shadow: 
+        0 0 10px rgba(255, 51, 102, 0.7),
+        2px 2px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 0 20px rgba(255, 51, 102, 0.5);
+}
+
+.purchase-message.show {
+    opacity: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 500px) {
+    .shop-items-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .shop-item {
+        padding: 10px;
+    }
+    
+    .shop-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .shop-item-price {
+        font-size: 1rem;
+    }
+    
+    .shop-buy-btn {
+        font-size: 0.9rem;
+        padding: 6px 0;
+    }
+}
+
+
+/* Основной контейнер магазина (добавьте это) */
+#shop.tab-screen {
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    padding-bottom: 80px; /* Оставляем место для нижнего меню */
+    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+}
+
+
+
+
+
+/* Стиль информационного сообщения */
+/* Стиль информационного сообщения */
+.shop-notice {
+    font-family: 'Impact', sans-serif;
+    color: #ff33669e; /* Розовый цвет как в других элементах */
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 5px auto 15px;
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.2),
+        0 0 5px rgba(255,255,255,0.3); /* Такая же тень как у других текстов */
+    opacity: 0.9;
+    max-width: 90%;
+    line-height: 1.4;
+} 
+
+@keyframes pulseNotice {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* Для мобильных */
+@media (max-width: 500px) {
+    .shop-notice {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+}
+
+
+/* Стили для кнопки техподдержки */
+.support-btn {
+    display: inline-block;
+    background: #892be291; /* Фиолетовый фон */
+    color: white; /* Белый текст */
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s ease;
+}
+
+.support-btn:hover {
+    background: #7B1FA2; /* Темнее при наведении */
+}
+
+.support-btn:active {
+    background: #6A1B9A; /* Еще темнее при нажатии */
+}
+
+/* Для мобильных */
+@media (max-width: 500px) {
+    .support-btn {
+        padding: 10px 25px;
+        font-size: 1.1rem;
+    }
+}
+
+
+
+/* Стили для промокода */
+.promo-input {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid #ff3366;
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: #ff3366;
+    font-family: 'Impact', sans-serif;
+    font-size: 1rem;
+    width: 100px;
+    text-align: center;
+    margin-top: 5px;
+    outline: none;
+}
+
+.promo-input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.promo-input:focus {
+    border-color: #ff1493;
+    box-shadow: 0 0 8px rgba(255,20,147,0.5);
+}
+
+
+
+/* Стиль сообщения о успешном промокоде */
+.promo-success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #4CAF50; /* Зеленый для успеха */
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+    border: 2px solid #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.promo-success-message.show {
+    opacity: 1;
+}
+
+
+
+/* Контейнер заданий с прокруткой */
+#quests.tab-screen {
+    overflow-y: auto;
+}
+
+/* Уменьшаем отступ между блоками с информацией о стоимости и текущих очках */
+#case-reward-info {
+    margin-bottom: 5px; /* Уменьшаем отступ снизу (было больше) */
+}
+
+#case-reward-status {
+    margin-top: 5px; /* Уменьшаем отступ сверху (если нужно) */
+}
+
+
+
+
+
+html, body {
+    touch-action: manipulation; /* Отключает двойной тап для зума */
+    overscroll-behavior-y: contain; /* Предотвращает "pull-to-refresh" */
+}
+
+/* Блокировка масштабирования для всего документа */
+body {
+    -webkit-text-size-adjust: 100%; /* Фикс для iOS */
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+
+
+
+
+/* Запрет выделения текста и копирования */
+body {
+    -webkit-user-select: none; /* Для Safari и Chrome */
+    -moz-user-select: none;    /* Для Firefox */
+    -ms-user-select: none;     /* Для IE/Edge */
+    user-select: none;         /* Стандартное свойство */
+}
+
+/* Дополнительно: запрет контекстного меню (правой кнопки мыши) */
+body {
+    -webkit-touch-callout: none; /* Для iOS Safari */
+}
